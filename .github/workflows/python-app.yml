@@ -1,4 +1,4 @@
-
+# python-app.yml — CON RUFF AGREGADO
 name: Python application
 
 on:
@@ -7,11 +7,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
@@ -19,14 +19,16 @@ jobs:
 
     - name: Install dependencies
       run: |
-       pip install -r requirements.txt
-       pip install pytest
+        pip install -r requirements.txt
+
+    - name: Ejecutar Ruff        # ← paso nuevo que detectará errores de estilo
+      run: ruff check .
 
     - name: Test with pytest
       run: pytest
-    
+
     - name: Ejecutar la Aplicacion
       run: python app.py
 
-    - name: "Simulacion Deploy"
+    - name: Simulacion Deploy
       run: echo "Desplegando la aplicacion..."
